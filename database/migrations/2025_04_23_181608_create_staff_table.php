@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('no_telepon');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('role',['Admin','Pelanggan']);
+            $table->enum('role',['Admin','Pelanggan','Manajer']);
             $table->string('profile')->nullable();
             $table->timestamps();
         });

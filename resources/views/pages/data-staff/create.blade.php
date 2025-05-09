@@ -39,7 +39,8 @@
                                 <select name="role" id="role" class="form-control" required>
                                     <option value="" disabled selected>Pilih role</option>
                                     <option value="admin">Admin</option>
-                                    <option value="karyawan">Karyawan</option>
+                                    <option value="Pelanggan">Pelangan</option>
+                                    <option value="Manajer">Manager</option>
                                 </select>
                             </div>
 
@@ -53,10 +54,6 @@
                                 <input type="file" name="profile" id="profile" class="form-control">
                             </div>
 
-                            <div class="form-group">
-                                <label for="tandatangan">Tanda Tangan</label>
-                                <input type="file" class="form-control" name="tandatangan" id="tandatangan">
-                            </div>
 
                             <div class="m-2 d-flex justify-content-between align-items-center">
                                 <a href="{{ route('data-staff.index') }}" class="btn btn-secondary">Kembali</a>

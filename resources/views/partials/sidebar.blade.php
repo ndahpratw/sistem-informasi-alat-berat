@@ -29,7 +29,11 @@
                 </a>
                 @else
                 @endif
-                <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                <a class="sidebar-link" href="./data-karyawan" aria-expanded="false">
+                    <i class="fas fa-person"></i>
+                    <p>Karyawan</p>
+                </a>
+                <a class="sidebar-link" href="./data-alat" aria-expanded="false">
                     <i class="fas fa-car"></i>
                     <p>Alat Berat</p>
                 </a>

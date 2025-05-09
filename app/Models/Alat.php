@@ -9,5 +9,5 @@ class Alat extends Model
 {
     use HasFactory;
     protected $table = 'alats';
-    protected $fillable = ['nama_alat', 'tipe', 'stok', 'harga_sewa', 'deskripsi'];
+    protected $fillable = ['nama_alat', 'tipe', 'stok', 'harga_sewa', 'deskripsi','gambar'];
 }

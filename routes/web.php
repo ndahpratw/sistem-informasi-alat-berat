@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AlatController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\KaryawanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +33,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::group(['middleware' => 'cekrole:Admin,Pelanggan'], function() {
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
     Route::resource('/data-staff', StaffController::class)->names('data-staff');
+    Route::resource('/data-karyawan', KaryawanController::class)->names('data-karyawan');
+    Route::resource('/data-alat', AlatController::class)->names('data-alat');
 });
 
