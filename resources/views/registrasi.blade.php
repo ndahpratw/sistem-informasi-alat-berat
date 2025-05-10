@@ -68,7 +68,7 @@
                     </div>
                 </div>
 
-                <div class="text-center mt-3">
+                <div class="text-center my-5">
                     <small>Sudah punya akun? <a href="{{ route('login') }}">Login di sini</a></small>
                 </div>
 

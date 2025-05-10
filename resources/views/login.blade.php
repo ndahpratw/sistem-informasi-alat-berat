@@ -25,7 +25,7 @@
             
             <!-- Logo -->
             <div class="text-center mb-4">
-              <img src="{{ asset('landing/img/LogoIDKY.png') }}" alt="Logo" class="img-fluid mb-3" style="width: 150px;">
+              <img src="{{ asset('assets/img/logo/logo.jpg') }}" alt="Logo" class="img-fluid mb-3" style="width: 150px;">
               <h4 class="name">Alat Berat</h4>
             </div>
 
