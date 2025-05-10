@@ -33,7 +33,7 @@
                 <div class="card">
                     <div class="card-body pt-3">
                         <div class="d-flex align-items-center justify-content-between m-3">
-                            <h5 class="card-title">Total:  Karyawan</h5>
+                            <h5 class="card-title">Total : {{ count($data) }} Karyawan</h5>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
                                 <i class="fas fa-plus fa-sm text-white-50"></i> Data Baru
                             </button>
@@ -59,11 +59,11 @@
                                         <td>
                                             <!-- Tombol Edit -->
                                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal-{{ $item->id }}">
-                                                <i class="bi bi-pencil-fill"></i>
+                                                <i class="fas fa-pen"></i>
                                             </button>
                                             <!-- Tombol Hapus -->
                                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $item->id }}">
-                                                <i class="bi bi-trash-fill"></i>
+                                                <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
                                     </tr>

@@ -72,12 +72,12 @@
                                         <td>
                                             <!-- Tombol Edit -->
                                             <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal-{{ $alat->id }}">
-                                                <i class="bi bi-pencil-fill"></i>
+                                                <i class="fas fa-pen"></i>
                                             </button>
 
                                             <!-- Tombol Hapus -->
                                             <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $alat->id }}">
-                                                <i class="bi bi-trash-fill"></i>
+                                                <i class="fas fa-trash"></i>
                                             </button>
                                         </td>
                                     </tr>

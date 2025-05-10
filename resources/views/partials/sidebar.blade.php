@@ -18,22 +18,21 @@
       <div class="sidebar-content">
           <ul class="nav nav-secondary">
               <li class="nav-item active">
-                  <a class="sidebar-link" href="./dashboard" aria-expanded="false">
+                  <a class="sidebar-link" href="/dashboard" aria-expanded="false">
                       <i class="fas fa-home"></i>
                       <p>Dashboard</p>
                   </a>
-                  @if (auth()->user()->role == 'Admin')
-                  <a class="sidebar-link" href="./data-staff" aria-expanded="false">
-                    <i class="fas fa-person"></i>
-                    <p>Staff</p>
-                </a>
-                @else
+                @if (auth()->user()->role == 'Admin')
+                    <a class="sidebar-link" href="/data-staff" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                        <p>Staff</p>
+                    </a>
                 @endif
-                <a class="sidebar-link" href="./data-karyawan" aria-expanded="false">
-                    <i class="fas fa-person"></i>
+                <a class="sidebar-link" href="/data-karyawan" aria-expanded="false">
+                    <i class="fas fa-user"></i>
                     <p>Karyawan</p>
                 </a>
-                <a class="sidebar-link" href="./data-alat" aria-expanded="false">
+                <a class="sidebar-link" href="/data-alat" aria-expanded="false">
                     <i class="fas fa-car"></i>
                     <p>Alat Berat</p>
                 </a>

@@ -68,10 +68,10 @@
                                 </th>
                                 <th>
                                     <a href="{{ route('data-staff.edit', $data->id) }}" class="btn btn-primary btn-sm">
-                                        <i class="bi bi-pencil-fill"></i>
+                                        <i class="fas fa-pen"></i>
                                     </a>
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $data->id }}">
-                                        <i class="bi bi-trash-fill"></i>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </th>
                             </tr>
