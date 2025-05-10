@@ -34,8 +34,10 @@ class LoginController extends Controller
          if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
             
-            if ($user->role === 'Admin' || $user->role === 'Pelanggan') {
+            if ($user->role === 'Admin') {
                 return redirect('/dashboard');
+            } elseif ($user->role === 'Pelanggan') {
+                return redirect('/');
             } else {
                 return redirect('/')->with('wrong', 'Role tidak Ditemukan !');
             }

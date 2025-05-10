@@ -22,7 +22,7 @@ class CekRole
             return $next($request);
         }
         
-        return redirect('/')->with('wrong', 'Harap Login Terlebih Dahulu');
+        return redirect('/login')->with('wrong', 'Harap Login Terlebih Dahulu');
     }
 
 }

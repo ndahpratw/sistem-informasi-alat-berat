@@ -14,40 +14,77 @@
           </div>
       </div>
   </div>
-  <div class="sidebar-wrapper scrollbar scrollbar-inner">
+
+  @if (auth()->user()->role == 'Admin')
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
       <div class="sidebar-content">
           <ul class="nav nav-secondary">
-              <li class="nav-item active">
+              <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
                   <a class="sidebar-link" href="/dashboard" aria-expanded="false">
                       <i class="fas fa-home"></i>
                       <p>Dashboard</p>
                   </a>
-                @if (auth()->user()->role == 'Admin')
+              </li>
+            @if (auth()->user()->role == 'Admin')
+                <li class="nav-item {{ Request::is('data-staff*') ? 'active' : '' }}">
                     <a class="sidebar-link" href="/data-staff" aria-expanded="false">
                         <i class="fas fa-user"></i>
                         <p>Staff</p>
                     </a>
-                @endif
+                </li>
+            @endif
+            <li class="nav-item {{ Request::is('data-karyawan*') ? 'active' : '' }}">            
                 <a class="sidebar-link" href="/data-karyawan" aria-expanded="false">
                     <i class="fas fa-user"></i>
                     <p>Karyawan</p>
                 </a>
+            </li>
+            <li class="nav-item {{ Request::is('data-alat*') ? 'active' : '' }}">            
                 <a class="sidebar-link" href="/data-alat" aria-expanded="false">
                     <i class="fas fa-car"></i>
                     <p>Alat Berat</p>
                 </a>
-
-                <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+            </li>
+            <li class="nav-item {{ Request::is('data-penyewaan*') ? 'active' : '' }}">
+                <a class="sidebar-link" href="/data-penyewaan" aria-expanded="false">
                     <i class="fas fa-shopping-cart"></i>
-                    <p>penyewaan</p>
+                    <p>Penyewaan</p>
                 </a>
-                <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+            </li>
+            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                <a class="sidebar-link" href="" aria-expanded="false">
                     <i class="fas fa-wallet"></i>
                     <p>pembayaran</p>
                 </a>
-               
-              <!-- Add other sidebar items here -->
+            </li>
+          </ul>
+        </div>
+    </div>
+
+  @elseif(auth()->user()->role=='Pelanggan')
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+      <div class="sidebar-content">
+          <ul class="nav nav-secondary">
+              <li class="nav-item  {{ Request::is('profile') ? 'active' : '' }}">
+                  <a class="sidebar-link" href="/profile" aria-expanded="false">
+                      <i class="fas fa-user"></i>
+                      <p>Profile</p>
+                  </a>
+              </li>
+              <li class="nav-item {{ Request::is('sewa-alat') ? 'active' : '' }}">
+                  <a class="sidebar-link" href="/sewa-alat" aria-expanded="false">
+                      <i class="fas fa-shopping-cart"></i>
+                      <p>Riwayat Penyewaan</p>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="sidebar-link" href="/" aria-expanded="false">
+                      <i class="fas fa-home"></i>
+                      <p>Halaman Utama</p>
+                  </a>
+              </li>
           </ul>
       </div>
-  </div>
+    </div>
+  @endif
 </div>

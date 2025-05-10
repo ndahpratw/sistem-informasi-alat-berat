@@ -9,9 +9,15 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+    public function index()
+    {
+        $data = auth()->user();
+        return view('pages.customer.profile', compact('data'));
+    }
+
     public function showRegistrationForm()
     {
-        return view('registrasi'); // Pastikan Anda memiliki view ini
+        return view('registrasi');
     }
 
     public function register(Request $request)

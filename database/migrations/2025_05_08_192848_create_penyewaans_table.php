@@ -13,15 +13,18 @@ return new class extends Migration
     {
         Schema::create('penyewaans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pelanggans');
-            $table->unsignedBigInteger('id_karyawans');
+            $table->foreignId('id_pelanggan')->constrained('staff','id')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('id_karyawan')->nullable()->constrained('staff','id')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreignId('id_alat')->constrained('alats','id')->onUpdate('cascade')->onDelete('restrict');
             $table->date('tanggal_sewa');
             $table->date('tanggal_kembali');
+            $table->integer('jumlah_peminjaman');
             $table->decimal('total_biaya', 10, 2);
-            $table->enum('status', ['diproses', 'disetujui', 'ditolak', 'selesai']);
-            $table->timestamps(); // Hanya ini, jangan tambah created_at/updated_at lagi
+            $table->string('metode_pembayaran');
+            $table->enum('status_pembayaran', ['sudah bayar', 'belum bayar']);
+            $table->enum('status_penyewaan', ['menunggu pembayaran', 'diproses', 'disetujui', 'ditolak', 'selesai', 'dibatalkan']);
+            $table->timestamps();
         });
-        
     }
 
     /**
