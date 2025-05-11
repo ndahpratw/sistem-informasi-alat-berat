@@ -2,7 +2,10 @@
  
   <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
       <div class="container-fluid">
-          <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+            <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex justify-content-center align-items-center">
+                <p>Hari Ini : {{ \Carbon\Carbon::now()->format('d-m-Y') }}</p>
+            </nav>
+            <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
               <li class="nav-item topbar-user dropdown hidden-caret">
                   <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                       <div class="avatar-sm">

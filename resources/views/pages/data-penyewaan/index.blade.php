@@ -33,8 +33,8 @@
                         <div class="card-body pt-3">
 
                             <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
+                                <table class="table table-bordered" id="basic-datatables">
+                                    <thead class="text-center">
                                         <tr>
                                             <th>No.</th>
                                             <th>Penyewa</th>
@@ -42,8 +42,8 @@
                                             <th>Jumlah</th>
                                             <th>Biaya</th>
                                             <th>Tanggal Sewa</th>
-                                            <th>Status Pembayaran</th>
                                             <th>Status Penyewaan</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,9 +54,96 @@
                                                 <td> {{ $item->alat->nama_alat }} </td>
                                                 <td> {{ $item->jumlah_peminjaman }} </td>
                                                 <td> Rp. {{ number_format($item->total_biaya, 0, ',', '.') }} </td>
-                                                <td> {{ $item->tanggal_sewa }} - {{ $item->tanggal_kembali }} </td>
-                                                <td> {{ $item->status_pembayaran }} </td>
-                                                <td> {{ $item->status_penyewaan }} </td>
+                                                <td class="text-center"> {{ \Carbon\Carbon::parse($item->tanggal_sewa)->translatedFormat('d F Y') }} <br> - <br> {{ \Carbon\Carbon::parse($item->tanggal_kembali)->translatedFormat('d F Y') }} </td>
+                                                <td class="text-center"> 
+                                                    @if ($item->status_penyewaan == 'menunggu pembayaran')
+                                                        <p class="text-secondary">menunggu pembayaran</p>
+                                                    @elseif ($item->status_penyewaan == 'diproses')
+                                                        <!-- Tombol Edit -->
+                                                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#setujui-{{ $item->id }}">
+                                                            setujui
+                                                        </button>
+                                                        <div class="modal fade" id="setujui-{{ $item->id }}" tabindex="-1" aria-labelledby="setujuiLabel-{{ $item->id }}" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <form action="/update-status/{{ $item->id }}" method="POST">
+                                                                        @csrf
+                                                                        @method('put')
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Konfirmasi Peminjaman</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            Apakah anda yakin <b>menyetujui</b> peminjaman alat {{ $item->alat->nama_alat }}?
+                                                                            <input type="hidden" name="status_penyewaan" value="disetujui">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-danger">Yakin</button>
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Tombol Hapus -->
+                                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#tolak-{{ $item->id }}">
+                                                            tolak
+                                                        </button>
+                                                        <div class="modal fade" id="tolak-{{ $item->id }}" tabindex="-1" aria-labelledby="tolakLabel-{{ $item->id }}" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <form action="/update-status/{{ $item->id }}" method="POST">
+                                                                        @csrf
+                                                                        @method('put')
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Konfirmasi Penolakan</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            Apakah anda yakin <b>menolak</b> peminjaman alat {{ $item->alat->nama_alat }}?
+                                                                            <input type="hidden" name="status_penyewaan" value="ditolak">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-danger">Yakin</button>
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                    @elseif ($item->status_penyewaan == 'disetujui')
+                                                        <p class="text-primary">disetujui</p>
+                                                    @elseif ($item->status_penyewaan == 'ditolak')
+                                                        <p class="text-danger">ditolak admin ({{ $item->admin->name}}) </p>
+                                                    @elseif ($item->status_penyewaan == 'dibatalkan')
+                                                        <p class="text-danger">dibatalkan pelanggan</p>
+                                                    @elseif ($item->status_penyewaan == 'selesai')
+                                                        <p class="text-succes">selesai</p>
+
+                                                    @endif                                                
+                                                </td>
+                                                <td>
+                                                    @if($item->bukti_pembayaran != null)
+                                                    <button type="button" class="btn btn-primary btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#tampil<?php echo $item->id?>"><i class="fas fa-camera"></i></button>
+                                                    <div class="modal fade" id="tampil<?php echo $item->id?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Bukti Pembayaran</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                <img src="{{ asset('assets/img/bukti-pembayaran/'.$item->bukti_pembayaran) }}" alt="{{ $item->bukti_pembayaran }}" class="img-fluid">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @else
+                                                        Bukti pembayaran belum diunggah
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

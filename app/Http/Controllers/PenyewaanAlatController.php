@@ -43,7 +43,6 @@ class PenyewaanAlatController extends Controller
         $penyewaan->jumlah_peminjaman = $request->jumlah;
         $penyewaan->total_biaya = $request->total;
         $penyewaan->metode_pembayaran = $request->metode_pembayaran;
-        $penyewaan->status_pembayaran = 'belum bayar';
         $penyewaan->status_penyewaan = 'menunggu pembayaran';
 
         if ($penyewaan->save()) {
@@ -66,8 +65,5 @@ class PenyewaanAlatController extends Controller
         return redirect()->back()->with('success', 'Penyewaan Alat Berhasil Dibatalkan!');
     }
 
-    public function pembayaran($id) {
-        $data_penyewaan = Penyewaan::findOrfail($id);
-        return view('pages.customer.pembayaran', compact('data_penyewaan'));
-    }
+
 }

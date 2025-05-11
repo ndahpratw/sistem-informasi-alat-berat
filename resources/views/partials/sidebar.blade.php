@@ -54,7 +54,19 @@
             <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
                 <a class="sidebar-link" href="" aria-expanded="false">
                     <i class="fas fa-wallet"></i>
-                    <p>pembayaran</p>
+                    <p>Pengembalian</p>
+                </a>
+            </li>
+            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                <a class="sidebar-link" href="" aria-expanded="false">
+                    <i class="fas fa-wallet"></i>
+                    <p>Denda</p>
+                </a>
+            </li>
+            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                <a class="sidebar-link" href="" aria-expanded="false">
+                    <i class="fas fa-wallet"></i>
+                    <p>Setting</p>
                 </a>
             </li>
           </ul>
@@ -71,7 +83,7 @@
                       <p>Profile</p>
                   </a>
               </li>
-              <li class="nav-item {{ Request::is('sewa-alat') ? 'active' : '' }}">
+              <li class="nav-item {{ Request::is('sewa-alat') | Request::is('pembayaran*') ? 'active' : '' }}">
                   <a class="sidebar-link" href="/sewa-alat" aria-expanded="false">
                       <i class="fas fa-shopping-cart"></i>
                       <p>Riwayat Penyewaan</p>

@@ -42,7 +42,7 @@ class LoginController extends Controller
                 return redirect('/')->with('wrong', 'Role tidak Ditemukan !');
             }
         } else {
-            return redirect('/')->with('wrong', 'Email dan password tidak tersedia');
+            return redirect('/login')->with('wrong', 'Email dan password tidak tersedia');
         }
     }
 

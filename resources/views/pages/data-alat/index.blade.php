@@ -33,14 +33,14 @@
                 <div class="card">
                     <div class="card-body pt-3">
                         <div class="d-flex align-items-center justify-content-between m-3">
-                            <h5 class="card-title">Total:  Karyawan</h5>
+                            <h5 class="card-title">Total : {{ count($data) }}  Alat Berat</h5>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
                                 <i class="fas fa-plus fa-sm text-white-50"></i> Data Baru
                             </button>
                         </div>
 
                         <div class="table-responsive">
-                           <table class="table table-bordered">
+                           <table class="table table-bordered" id="basic-datatables">
                             <thead>
                                 <tr>
                                     <th>No.</th>

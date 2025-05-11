@@ -41,16 +41,14 @@
                                                     <p style="color: #254336">{{ $item->alat->nama_alat}}</p>
                                                     @if ($item->status_penyewaan == 'dibatalkan')
                                                         <p class="text-danger">{{ $item->status_penyewaan }}</p>
-                                                    @else                                                        
-                                                        @if ($item->status_pembayaran == 'belum bayar')
-                                                            <p class="text-danger">{{ $item->status_pembayaran }}</p>
-                                                        @elseif($item->status_pembayaran == 'sudah bayar' && $item->status_penyewaan == 'menunggu pembayaran')
-                                                            <p class="text-danger">menunggu konfirmasi</p>
-                                                        @elseif ($item->status_pesanan == 'selesai')
-                                                            <p class="text-success">{{ $item->status_penyewaan }}</p>
-                                                        @else
-                                                            <p class="text-danger">{{ $item->status_penyewaan }}</p>
-                                                        @endif
+                                                    @elseif($item->status_penyewaan == 'menunggu pembayaran')
+                                                        <p class="text-secondary">menunggu pembayaran</p>
+                                                    @elseif ($item->status_penyewaan == 'selesai')
+                                                        <p class="text-success">{{ $item->status_penyewaan }}</p>
+                                                    @elseif ($item->status_penyewaan == 'diproses')
+                                                        <p class="text-warning">{{ $item->status_penyewaan }}</p>
+                                                    @elseif ($item->status_penyewaan == 'disetujui')
+                                                        <p class="text-primary">{{ $item->status_penyewaan }}</p>
                                                     @endif
                                                 </div>
 
@@ -67,11 +65,11 @@
                                                             x {{ $item->jumlah_peminjaman }}
                                                         </div>
                                                         <p class="d-flex justify-content-end"> 
-                                                            {{ $item->harga_sewa }} 
+                                                            Rp. {{ number_format($item->alat->harga_sewa, 0, ',', '.') }}
                                                             <hr>
                                                             <div class="d-flex justify-content-between">
                                                             <p> Total Pesanan : </p>
-                                                            <p> {{ $item->total_biaya }} </p>
+                                                            <p> Rp {{ number_format($item->total_biaya, 0, ',', '.') }} </p>
                                                             </div>
                                                         </p>
                                                     </div>
@@ -81,8 +79,8 @@
                                                 @if ($item->status_penyewaan == 'dibatalkan')
                                                     <p class="text-danger text-center">penyewaan alat berat dibatalkan</p> 
                                                 @else
-                                                    @if ($item->status_pembayaran === 'belum bayar' )
-                                                        <div class="d-flex justify-content-between">
+                                                    @if ($item->status_penyewaan === 'menunggu pembayaran' )
+                                                    <div class="d-flex justify-content-between">
                                                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#payment-cancel<?php echo $item->id?>"> Batalkan Pesanan </button>
                                                         <div class="modal fade" id="payment-cancel<?php echo $item->id?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered">
@@ -102,7 +100,7 @@
                                                             </div>
                                                         </div>
                                                         @if ($item->bukti_pembayaran == null)
-                                                            <a class="btn btn-danger" href="/pembayaran-sewa-alat/{{ $item->id }}">Bayar Sekarang</a>
+                                                            <a class="btn btn-danger" href="/pembayaran/{{ $item->id }}">Bayar Sekarang</a>
                                                         @endif
                                                         </div>
                                                     @endif

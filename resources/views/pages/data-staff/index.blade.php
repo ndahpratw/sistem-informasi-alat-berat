@@ -39,7 +39,7 @@
                         </div>
                          <!-- Add more cards as needed -->
                   <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="basic-datatables">
                         <thead>
                             <tr>
                                 <th>No.</th>

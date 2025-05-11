@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('jumlah_peminjaman');
             $table->decimal('total_biaya', 10, 2);
             $table->string('metode_pembayaran');
-            $table->enum('status_pembayaran', ['sudah bayar', 'belum bayar']);
+            $table->string('bukti_pembayaran')->nullable();
             $table->enum('status_penyewaan', ['menunggu pembayaran', 'diproses', 'disetujui', 'ditolak', 'selesai', 'dibatalkan']);
             $table->timestamps();
         });
