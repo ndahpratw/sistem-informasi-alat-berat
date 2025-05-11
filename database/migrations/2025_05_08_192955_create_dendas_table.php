@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('dendas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_pengembalian')->constrained('pengembalians','id')->onUpdate('cascade')->onDelete('restrict');
+            $table->decimal('jumlah_denda', 10, 2);
+            $table->string('alasan');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alat;
 use App\Models\Penyewaan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,6 +42,11 @@ class PembayaranController extends Controller
             'status_penyewaan' => $request->status_penyewaan,
             'id_karyawan' => auth()->user()->id,
         ]);
+
+        if ($request->status_penyewaan == 'ditolak') {
+            $alat_berat = Alat::find($penyewaan->id_alat);
+            $alat_berat->increment('stok', $penyewaan->jumlah_peminjaman);
+        }
         return redirect()->back()->with('success', 'Status penyewaan berhasil diupdate!');
     }
 }

@@ -39,7 +39,7 @@
                                                 <div class="card-body my-4">
                                                 <div class="d-flex justify-content-between align-item-center">
                                                     <p style="color: #254336">{{ $item->alat->nama_alat}}</p>
-                                                    @if ($item->status_penyewaan == 'dibatalkan')
+                                                    @if ($item->status_penyewaan == 'dibatalkan' || $item->status_penyewaan == 'ditolak')
                                                         <p class="text-danger">{{ $item->status_penyewaan }}</p>
                                                     @elseif($item->status_penyewaan == 'menunggu pembayaran')
                                                         <p class="text-secondary">menunggu pembayaran</p>
@@ -76,8 +76,35 @@
                                                     <p class="text-center"><b>Tanggal Penyewaan</b> : {{ \Carbon\Carbon::parse($item->tanggal_sewa)->translatedFormat('d F Y') }} sampai {{ \Carbon\Carbon::parse($item->tanggal_kembali)->translatedFormat('d F Y') }}</p>
                                                 <hr>
                                                 </div>
+                                                @if ($item->pengembalian)
+                                                    <table style="width: 100%">
+                                                        <tr>
+                                                            <td> Tanggal pengembalian </td>
+                                                            <td> : </td>
+                                                            <td> {{ \Carbon\Carbon::parse($item->pengembalian->tanggal_dikembalikan)->translatedFormat('d F Y') }} </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Kondisi </td>
+                                                            <td> : </td>
+                                                            <td> {{ $item->pengembalian->kondisi_alat }} </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Denda </td>
+                                                            <td> : </td>
+                                                            <td>
+                                                                @if ($item->pengembalian->denda)
+                                                                    Rp. {{ number_format($item->pengembalian->denda->jumlah_denda, 0, ',', '.') }}
+                                                                @else
+                                                                -
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                @endif                                               
                                                 @if ($item->status_penyewaan == 'dibatalkan')
                                                     <p class="text-danger text-center">penyewaan alat berat dibatalkan</p> 
+                                                @elseif ($item->status_penyewaan == 'ditolak')
+                                                    <p class="text-danger text-center">penyewaan alat berat ditolak</p> 
                                                 @else
                                                     @if ($item->status_penyewaan === 'menunggu pembayaran' )
                                                     <div class="d-flex justify-content-between">
@@ -104,18 +131,6 @@
                                                         @endif
                                                         </div>
                                                     @endif
-                                                    @if ($item->status_pesanan === 'dikirim' )
-                                                        <div class="d-flex justify-content-center">
-                                                        <a class="btn btn-success my-3" href="/pesanan-terima/{{ $item->id }}">Terima</a>
-                                                        </div>
-                                                    @endif
-                                                    {{-- @if ($item->status_pesanan === 'selesai' )
-                                                        @if ($item->ratingProduk === null)        
-                                                        <div class="d-flex justify-content-center">
-                                                            <a style="background-color: #254336; padding:5px 50px; border-radius: 5px" href="/rating/{{ $item->id }}">Rating</a>
-                                                        </div>
-                                                        @endif
-                                                    @endif --}}
                                                 @endif
                                                 </div>
                                             </div>

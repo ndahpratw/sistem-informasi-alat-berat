@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengembalians', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_penyewaan')->constrained('penyewaans','id')->onUpdate('cascade')->onDelete('restrict');
-            $table->date('tanggal_dikembalikan');
-            $table->text('kondisi_alat');
-            $table->integer('jumlah_alat');
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengembalians');
+        Schema::dropIfExists('settings');
     }
 };

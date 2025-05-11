@@ -59,7 +59,7 @@
                                                     @if ($item->status_penyewaan == 'menunggu pembayaran')
                                                         <p class="text-secondary">menunggu pembayaran</p>
                                                     @elseif ($item->status_penyewaan == 'diproses')
-                                                        <!-- Tombol Edit -->
+                                                        <!-- Tombol setuju -->
                                                         <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#setujui-{{ $item->id }}">
                                                             setujui
                                                         </button>
@@ -86,7 +86,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <!-- Tombol Hapus -->
+                                                        <!-- Tombol tolak -->
                                                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#tolak-{{ $item->id }}">
                                                             tolak
                                                         </button>
@@ -120,11 +120,48 @@
                                                     @elseif ($item->status_penyewaan == 'dibatalkan')
                                                         <p class="text-danger">dibatalkan pelanggan</p>
                                                     @elseif ($item->status_penyewaan == 'selesai')
-                                                        <p class="text-succes">selesai</p>
-
+                                                        <p class="text-success">selesai</p>
+                                                        @if ($item->pengembalian)
+                                                            <button type="button" class="btn btn-success btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#catatan{{ $item->id }}"><i class="fas fa-file"></i></button>
+                                                            <div class="modal fade" id="catatan{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Catatan</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <table style="width: 100%">
+                                                                                <tr>
+                                                                                    <td> Tanggal pengembalian </td>
+                                                                                    <td> : </td>
+                                                                                    <td> {{ \Carbon\Carbon::parse($item->pengembalian->tanggal_dikembalikan)->translatedFormat('d F Y') }} </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> Kondisi </td>
+                                                                                    <td> : </td>
+                                                                                    <td> {{ $item->pengembalian->kondisi_alat }} </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> Denda </td>
+                                                                                    <td> : </td>
+                                                                                    <td>
+                                                                                        @if ($item->pengembalian->denda)
+                                                                                            Rp. {{ number_format($item->pengembalian->denda->jumlah_denda, 0, ',', '.') }}
+                                                                                        @else
+                                                                                        -
+                                                                                        @endif
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
                                                     @endif                                                
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     @if($item->bukti_pembayaran != null)
                                                     <button type="button" class="btn btn-primary btn-sm shadow-none" data-bs-toggle="modal" data-bs-target="#tampil<?php echo $item->id?>"><i class="fas fa-camera"></i></button>
                                                     <div class="modal fade" id="tampil<?php echo $item->id?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

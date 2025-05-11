@@ -51,14 +51,14 @@
                     <p>Penyewaan</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                <a class="sidebar-link" href="" aria-expanded="false">
+            <li class="nav-item {{ Request::is('data-pengembalian*') ? 'active' : '' }}">
+                <a class="sidebar-link" href="/data-pengembalian" aria-expanded="false">
                     <i class="fas fa-wallet"></i>
                     <p>Pengembalian</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                <a class="sidebar-link" href="" aria-expanded="false">
+            <li class="nav-item {{ Request::is('denda*') ? 'active' : '' }}">
+                <a class="sidebar-link" href="/denda" aria-expanded="false">
                     <i class="fas fa-wallet"></i>
                     <p>Denda</p>
                 </a>

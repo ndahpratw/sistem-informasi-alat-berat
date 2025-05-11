@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DendaController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\PenyewaanAlatController;
 use App\Http\Controllers\PenyewaanController;
 
@@ -48,5 +50,7 @@ Route::group(['middleware' => 'cekrole:Admin'], function() {
     Route::resource('/data-alat', AlatController::class)->names('data-alat');
     Route::resource('/data-penyewaan', PenyewaanController::class)->names('data-penyewaan');
     Route::put('/update-status/{id}', [PembayaranController::class, 'update_status']);
+    Route::resource('/data-pengembalian', PengembalianController::class)->names('data-pengembalian');
+    Route::resource('/denda', DendaController::class)->names('denda');
 });
 

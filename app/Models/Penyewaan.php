@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Alat;
 use App\Models\Staff;
+use App\Models\Pengembalian;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -24,4 +25,10 @@ class Penyewaan extends Model
     public function admin() {
         return $this->belongsTo(Staff::class, 'id_karyawan', 'id');
     }
+
+    public function pengembalian()
+    {
+        return $this->hasOne(Pengembalian::class, 'id_penyewaan');
+    }
+
 }

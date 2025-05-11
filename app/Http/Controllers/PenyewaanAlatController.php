@@ -55,7 +55,7 @@ class PenyewaanAlatController extends Controller
 
     public function cancel_sewa($id) {
         $penyewaan = Penyewaan::findOrfail($id);
-        $alat_berat = Alat::where('id', $penyewaan->id_alat)->first();
+        $alat_berat = Alat::find($penyewaan->id_alat);
 
         $penyewaan->update([
             'status_penyewaan' => 'dibatalkan',
