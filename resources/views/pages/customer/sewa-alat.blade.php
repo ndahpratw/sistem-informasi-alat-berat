@@ -210,7 +210,7 @@
             const sewaDate = new Date(this.value);
             if (!isNaN(sewaDate)) {
                 const kembaliDate = new Date(sewaDate);
-                kembaliDate.setDate(sewaDate.getDate() + 7); // Tambah 7 hari
+                kembaliDate.setDate(sewaDate.getDate() + 1); // Tambah 1 hari
 
                 // Format YYYY-MM-DD
                 const year = kembaliDate.getFullYear();

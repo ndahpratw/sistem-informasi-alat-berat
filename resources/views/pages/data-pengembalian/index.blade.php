@@ -70,33 +70,54 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <input type="hidden" name="id_penyewaan" value="{{ $item->id }}">
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Tanggal Pengembalian</label>
-                                                                            <input type="hidden" id="tanggal_kembali" value="{{ $item->tanggal_kembali }}">    
-                                                                            <input type="date" name="tanggal_pengembalian" id="tanggal_pengembalian" class="form-control @error('tanggal_pengembalian') is-invalid @enderror shadow-none" value="{{ old('tanggal_pengembalian', now()->toDateString()) }}">
-                                                                            @error('tanggal_pengembalian') 
-                                                                                <div class="invalid-feedback">
-                                                                                    {{ $message }}
-                                                                                </div> 
-                                                                            @enderror
+                                                                        <div class="row">
+                                                                            <div class="col-6 mb-3">
+                                                                                <label class="form-label">Tanggal Pengembalian</label>
+                                                                                <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="form-control @error('tanggal_kembali') is-invalid @enderror shadow-none" value="{{ $item->tanggal_kembali }}" disabled>
+                                                                                @error('tanggal_kembali') 
+                                                                                    <div class="invalid-feedback">
+                                                                                        {{ $message }}
+                                                                                    </div> 
+                                                                                @enderror
+                                                                            </div>
+                                                                            <div class="col-6 mb-3">
+                                                                                <label class="form-label">Tanggal Dikembalikan</label>
+                                                                                <input type="date" name="tanggal_pengembalian" id="tanggal_pengembalian" class="form-control @error('tanggal_pengembalian') is-invalid @enderror shadow-none" value="{{ old('tanggal_pengembalian', now()->toDateString()) }}" min="{{ now()->toDateString() }}">
+                                                                                @error('tanggal_pengembalian') 
+                                                                                    <div class="invalid-feedback">
+                                                                                        {{ $message }}
+                                                                                    </div> 
+                                                                                @enderror
+                                                                            </div>
                                                                         </div>
                                                                         <div class="mb-3">
-                                                                            <label class="form-label">Jumlah Pengembalian</label>
-                                                                            <input type="number" name="jumlah_pengembalian" class="form-control @error('jumlah_pengembalian') is-invalid @enderror shadow-none" value="{{ old('jumlah_pengembalian', $item->jumlah_peminjaman) }}" max="{{ $item->jumlah_peminjaman }}" min="0">
-                                                                            @error('jumlah_pengembalian') 
-                                                                                <div class="invalid-feedback">
-                                                                                    {{ $message }}
-                                                                                </div> 
-                                                                            @enderror
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Denda</label>
+                                                                            <label class="form-label">Total Denda (Rp. 10.000/hari)</label>
                                                                             <input type="number" name="denda" id="denda" class="form-control @error('jumlah_pengembalian') is-invalid @enderror shadow-none" value="0" readonly>
                                                                             @error('denda') 
                                                                                 <div class="invalid-feedback">
                                                                                     {{ $message }}
                                                                                 </div> 
                                                                             @enderror
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-6">
+                                                                                <label class="form-label">Jumlah Alat Yang Dipinjam</label>
+                                                                                <input type="number" name="jumlah_peminjaman" class="form-control @error('jumlah_peminjaman') is-invalid @enderror shadow-none" value="{{ $item->jumlah_peminjaman }}" disabled>
+                                                                                @error('jumlah_peminjaman') 
+                                                                                    <div class="invalid-feedback">
+                                                                                        {{ $message }}
+                                                                                    </div> 
+                                                                                @enderror
+                                                                            </div>
+                                                                            <div class="mb-3 col-6">
+                                                                                <label class="form-label">Jumlah Alat Yang Dikembalikan</label>
+                                                                                <input type="number" name="jumlah_pengembalian" class="form-control @error('jumlah_pengembalian') is-invalid @enderror shadow-none" value="{{ old('jumlah_pengembalian', $item->jumlah_peminjaman) }}" max="{{ $item->jumlah_peminjaman }}" min="0">
+                                                                                @error('jumlah_pengembalian') 
+                                                                                    <div class="invalid-feedback">
+                                                                                        {{ $message }}
+                                                                                    </div> 
+                                                                                @enderror
+                                                                            </div>
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label class="form-label">Kondisi Alat</label>
