@@ -45,12 +45,7 @@
                     <p>Alat Berat</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('data-penyewaan*') ? 'active' : '' }}">
-                <a class="sidebar-link" href="/data-penyewaan" aria-expanded="false">
-                    <i class="fas fa-shopping-cart"></i>
-                    <p>Penyewaan</p>
-                </a>
-            </li>
+              
             <li class="nav-item {{ Request::is('data-pengembalian*') ? 'active' : '' }}">
                 <a class="sidebar-link" href="/data-pengembalian" aria-expanded="false">
                     <i class="fas fa-wallet"></i>
@@ -71,6 +66,26 @@
             </li>
           </ul>
         </div>
+    </div>
+
+    @elseif(auth()->user()->role == 'Bendahara')
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+      <div class="sidebar-content">
+          <ul class="nav nav-secondary">
+              <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
+                  <a class="sidebar-link" href="/dashboard" aria-expanded="false">
+                      <i class="fas fa-home"></i>
+                      <p>Dashboard</p>
+                  </a>
+              </li>
+            <li class="nav-item {{ Request::is('data-penyewaan*') ? 'active' : '' }}">
+                  <a class="sidebar-link" href="/data-penyewaan" aria-expanded="false">
+                      <i class="fas fa-shopping-cart"></i>
+                      <p>Penyewaan</p>
+                  </a>
+              </li>
+          </ul>
+      </div>
     </div>
 
   @elseif(auth()->user()->role=='Pelanggan')

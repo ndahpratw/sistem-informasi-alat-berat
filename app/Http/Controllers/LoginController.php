@@ -75,41 +75,40 @@ class LoginController extends Controller
 
         return view('pages.dashboard', compact('informasi', 'customer', 'pemasukan', 'denda', 'totalPemasukan', 'totalDenda', 'labels', 'totals', 'dendaTotals', 'alatLabels', 'jumlahPeminjaman'));
     }
-    public function login(Request $request) {
-        // dd($request);
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => 'required',
-            'password'=> 'required' 
-         ], [
+            'password' => 'required'
+        ], [
             'email.required' => 'Kolom Email tidak boleh kosong.',
             'password.required' => 'Kolom Password tidak boleh kosong.',
         ]);
 
-
-         if (Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
-            
-            if ($user->role === 'Admin') {
+
+            if (in_array($user->role, ['Admin', 'Bendahara'])) {
                 return redirect('/dashboard');
             } elseif ($user->role === 'Pelanggan') {
                 return redirect('/');
             } else {
-                return redirect('/')->with('wrong', 'Role tidak Ditemukan !');
+                Auth::logout(); // logout jika role tidak dikenali
+                return redirect('/login')->with('wrong', 'Role tidak ditemukan!');
             }
-        } else {
-            return redirect('/login')->with('wrong', 'Email dan password tidak tersedia');
         }
+
+        return redirect('/login')->with('wrong', 'Email dan password tidak tersedia');
     }
 
     public function logout() {
         if (Auth::check()) {
             $role = Auth::user()->role;
-    
-           if ($role === 'Admin' || $role === 'Pelanggan') {
+
+            if (in_array($role, ['Admin', 'Bendahara', 'Pelanggan'])) {
                 Auth::logout();
             }
-        } 
+        }
         return redirect('/');
-
 }
 }

@@ -44,13 +44,18 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 
 Route::group(['middleware' => 'cekrole:Admin'], function() {
-    Route::get('/dashboard', [LoginController::class, 'dashboard']);
     Route::resource('/data-staff', StaffController::class)->names('data-staff');
     Route::resource('/data-karyawan', KaryawanController::class)->names('data-karyawan');
     Route::resource('/data-alat', AlatController::class)->names('data-alat');
-    Route::resource('/data-penyewaan', PenyewaanController::class)->names('data-penyewaan');
     Route::put('/update-status/{id}', [PembayaranController::class, 'update_status']);
     Route::resource('/data-pengembalian', PengembalianController::class)->names('data-pengembalian');
     Route::resource('/denda', DendaController::class)->names('denda');
 });
 
+Route::group(['middleware' => 'cekrole:Bendahara'], function() {
+     Route::resource('/data-penyewaan', PenyewaanController::class)->names('data-penyewaan');
+});
+
+Route::group(['middleware' => 'cekrole:Admin,Bendahara'], function() {
+    Route::get('/dashboard', [LoginController::class, 'dashboard']);
+});
